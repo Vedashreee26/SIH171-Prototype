@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "VisionGuard",
+  "version": "0.1.0",
+  "description": "Privacy-preserving browser agent shell. Sends sanitized page context only.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "VisionGuard"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*",
+    "http://localhost:5000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

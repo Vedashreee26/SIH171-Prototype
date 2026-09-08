@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VisionGuard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="brand">
+            <h1>VisionGuard</h1>
+        </div>
+        <p class="sub">Local vision + PII redaction before Flask</p>
+        <p class="status">Agent: <strong id="agent-status">Idle</strong></p>
+        <p class="status">Backend: <strong id="backend-status">Unknown</strong></p>
+        <div class="row">
+            <button type="button" class="btn primary" id="btn-start">Start Agent</button>
+            <button type="button" class="btn ghost" id="btn-stop" disabled>Stop Agent</button>
+        </div>
+        <button type="button" class="btn ghost" id="btn-analyze">Analyze this page</button>
+        <label for="backend-url">Flask URL</label>
+        <input type="text" id="backend-url" spellcheck="false">
+        <p class="privacy"><strong>Privacy:</strong> no screenshots, passwords, or raw PII are sent.</p>
+        <p class="status">Last action</p>
+        <pre class="action" id="last-action">None</pre>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

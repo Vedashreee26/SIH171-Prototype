@@ -1,22 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SIH 171 Prototype</title>
-
+    <title>VisionGuard — Privacy-Preserving Browser Agent</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-   <body>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div class="brand">
+                <div class="logo" aria-hidden="true">VG</div>
+                <div>
+                    <h1>VisionGuard</h1>
+                    <p class="tagline">On-device visual perception for lightweight browser agents</p>
+                </div>
+            </div>
+            <div class="topbar-status">
+                <span id="privacy-badge" class="badge badge-secure">PII stays on-device</span>
+                <span id="backend-badge" class="badge badge-warn">Checking backend…</span>
+                <span id="extension-badge" class="badge badge-muted">Extension not detected</span>
+            </div>
+        </header>
 
-    <div class="container">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="kicker">SIH 26171 prototype</p>
+                <h2>Privacy-preserving on-device browser automation</h2>
+                <p class="lede">
+                    VisionGuard observes the page locally, redacts sensitive information on the device,
+                    and sends <strong>only sanitized visual context</strong> to the server-side agent.
+                    Raw screenshots and personal data are never intended to leave this machine.
+                </p>
+            </div>
+            <div class="hero-controls">
+                <div class="status-pill" id="agent-status-pill">
+                    <span class="dot" id="agent-dot"></span>
+                    <span id="agent-status-text">Agent idle</span>
+                </div>
+                <div class="button-row">
+                    <button type="button" id="btn-start" class="btn btn-primary">Start Agent</button>
+                    <button type="button" id="btn-stop" class="btn btn-ghost" disabled>Stop Agent</button>
+                </div>
+                <p class="hint" id="control-hint">Start the agent to check Flask and begin the local pipeline.</p>
+            </div>
+        </section>
 
-        <h1>SIH 171 Prototype</h1>
+        <section class="metrics" aria-label="Status cards">
+            <article class="card metric">
+                <p class="metric-label">Local Processing</p>
+                <p class="metric-value" id="metric-local">Ready</p>
+                <p class="metric-note">Vision + redaction run on-device</p>
+            </article>
+            <article class="card metric">
+                <p class="metric-label">PII Protected</p>
+                <p class="metric-value" id="metric-pii">Active</p>
+                <p class="metric-note">Sensitive fields are stripped before network</p>
+            </article>
+            <article class="card metric">
+                <p class="metric-label">Agent Status</p>
+                <p class="metric-value" id="metric-agent">Idle</p>
+                <p class="metric-note" id="metric-agent-note">Waiting for start</p>
+            </article>
+        </section>
 
-        <p>Our frontend is working! 🚀</p>
+        <section class="card pipeline-card" aria-label="Processing pipeline">
+            <div class="section-head">
+                <h3>Visual pipeline</h3>
+                <p>Sanitized context is the only payload that may reach Flask.</p>
+            </div>
+            <ol class="pipeline" id="pipeline">
+                <li class="stage" data-stage="browser">
+                    <span class="stage-index">1</span>
+                    <span class="stage-name">Browser</span>
+                </li>
+                <li class="stage-arrow" aria-hidden="true">→</li>
+                <li class="stage" data-stage="vision">
+                    <span class="stage-index">2</span>
+                    <span class="stage-name">Local Vision</span>
+                </li>
+                <li class="stage-arrow" aria-hidden="true">→</li>
+                <li class="stage" data-stage="pii">
+                    <span class="stage-index">3</span>
+                    <span class="stage-name">PII Redaction</span>
+                </li>
+                <li class="stage-arrow" aria-hidden="true">→</li>
+                <li class="stage" data-stage="sanitized">
+                    <span class="stage-index">4</span>
+                    <span class="stage-name">Sanitized Context</span>
+                </li>
+                <li class="stage-arrow" aria-hidden="true">→</li>
+                <li class="stage" data-stage="agent">
+                    <span class="stage-index">5</span>
+                    <span class="stage-name">AI Agent</span>
+                </li>
+                <li class="stage-arrow" aria-hidden="true">→</li>
+                <li class="stage" data-stage="action">
+                    <span class="stage-index">6</span>
+                    <span class="stage-name">Browser Action</span>
+                </li>
+            </ol>
+        </section>
 
+        <section class="grid-two">
+            <article class="card">
+                <div class="section-head">
+                    <h3>Activity log</h3>
+                    <button type="button" id="btn-clear-log" class="btn btn-tiny">Clear</button>
+                </div>
+                <ol class="log" id="activity-log"></ol>
+            </article>
+            <article class="card">
+                <div class="section-head">
+                    <h3>Last detected action</h3>
+                    <span class="badge badge-muted" id="action-source">None yet</span>
+                </div>
+                <pre class="action-preview" id="last-action">No action received from the backend.</pre>
+                <p class="privacy-callout">
+                    Privacy: this dashboard never displays raw passwords, and the extension is built
+                    to omit screenshots, password values, and detected PII from server requests.
+                </p>
+            </article>
+        </section>
     </div>
-
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 </body>
 </html>
