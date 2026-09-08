@@ -1,0 +1,54 @@
+{
+  "url": "https://example.com/login",
+  "title": "Example Login",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "tag": "h1",
+      "text": "Sign in",
+      "bbox": [80, 40, 320, 90]
+    },
+    {
+      "tagName": "INPUT",
+      "type": "email",
+      "placeholder": "Email",
+      "id": "email",
+      "rect": { "x": 80, "y": 120, "width": 280, "height": 40 }
+    },
+    {
+      "tag": "input",
+      "type": "password",
+      "placeholder": "Password",
+      "id": "password",
+      "boundingClientRect": { "x": 80, "y": 180, "width": 280, "height": 40 }
+    },
+    {
+      "tag": "button",
+      "text": "Submit",
+      "id": "submit-btn",
+      "bbox": [80, 240, 180, 280]
+    },
+    {
+      "tag": "a",
+      "text": "Forgot password?",
+      "href": "/reset",
+      "bbox": [80, 300, 240, 324]
+    },
+    {
+      "tag": "select",
+      "name": "region",
+      "id": "region",
+      "bbox": [80, 340, 280, 376]
+    },
+    {
+      "tag": "input",
+      "type": "checkbox",
+      "text": "Remember me",
+      "id": "remember",
+      "bbox": [80, 390, 100, 410]
+    }
+  ]
+}
